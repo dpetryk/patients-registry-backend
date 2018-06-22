@@ -31,7 +31,6 @@ public class Visit {
 	@JoinColumn(name="visit_id")
 	private List<Note> notes;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="patient_id")
 	private Patient patient;
@@ -55,11 +54,11 @@ public class Visit {
 	public void setNotes(List<Note> notes) {
 		this.notes = notes;
 	}
-//	public Patient getPatient() {
-//		return patient;
-//	}
-//	public void setPatient(Patient patient) {
-//		this.patient = patient;
-//	}
+	public Patient getPatient() {
+		return patient;
+	}
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
 	
 }
