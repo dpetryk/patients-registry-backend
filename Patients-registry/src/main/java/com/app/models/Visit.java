@@ -1,6 +1,6 @@
 package com.app.models;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,8 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -26,6 +26,7 @@ public class Visit {
 	@Column(name="visit_id")
 	private Long id;
 	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date visitDate;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="visit_id")
@@ -60,5 +61,4 @@ public class Visit {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-	
 }

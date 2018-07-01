@@ -23,6 +23,7 @@ public class Note {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="note_id")
 	private Long id;
+	@Column(length = 1024)
 	private String note;
 	//@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM-dd-yyyy")
 	private Date noteDate;
