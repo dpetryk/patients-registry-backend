@@ -1,5 +1,6 @@
 package com.app.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,14 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.models.Visit;
 import com.app.repositories.VisitsRepository;
 
 @RestController
-@RequestMapping(value = "visits")
 public class VisitsController {
 
 	@Autowired
@@ -31,24 +30,39 @@ public class VisitsController {
 
 	@PostMapping
 	public Visit create(@RequestBody Visit visit) {
+		System.out.println("im in create visit");
+		System.out.println(visit.getVisitDate());
 		return visitsRepository.saveAndFlush(visit);
 	}
 
-	@GetMapping(value = "{id}")
+	@GetMapping(value = "visits/{id}")
 	public Optional<Visit> get(@PathVariable Long id) {
 		return visitsRepository.findById(id);
 	}
 
-	@PutMapping(value = "{id}")
+	@PutMapping(value = "visits/{id}")
 	public Visit update(@PathVariable Long id, @RequestBody Visit visit) {
 		Visit existingVisit = visitsRepository.getOne(id);
 		BeanUtils.copyProperties(visit, existingVisit);
 		return visitsRepository.saveAndFlush(existingVisit);
 	}
 
-	@DeleteMapping(value = "{id}")
+	@DeleteMapping(value = "visits/{id}")
 	public void delete(@PathVariable Long id) {
 		Visit existingVisit = visitsRepository.getOne(id);
 		visitsRepository.delete(existingVisit);
+	}
+
+	@GetMapping(value = "patients/{id}/visits")
+	public List<Visit> getVisitsOfPatient(@PathVariable Long id) {
+		List<Visit> response = new ArrayList<Visit>();
+		List<Visit> temp = visitsRepository.findAll();
+		for (Visit visit : temp) {
+			if (visit.getPatient().getId() == id) {
+				response.add(visit);
+			}
+		}
+		return response;
+
 	}
 }

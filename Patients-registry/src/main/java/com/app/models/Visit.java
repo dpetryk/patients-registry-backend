@@ -1,9 +1,7 @@
 package com.app.models;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,53 +9,64 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 @Entity
-@Table (name="visits")
+@Table(name = "visits")
 public class Visit {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="visit_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "visit_id")
 	private Long id;
-	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date visitDate;
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="visit_id")
-	private List<Note> notes;
-	
+	@Column(length = 1024)
+	private String notes;
+	@Column(length = 1024)
+	private String prescriptions;
 	@ManyToOne
-	@JoinColumn(name="patient_id")
+	@JoinColumn(name = "patient_id")
 	private Patient patient;
 
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public Date getVisitDate() {
 		return visitDate;
 	}
+
 	public void setVisitDate(Date date) {
 		this.visitDate = date;
 	}
-	public List<Note> getNotes() {
+
+	public String getNotes() {
 		return notes;
 	}
-	public void setNotes(List<Note> notes) {
+
+	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+
+	public String getPrescriptions() {
+		return prescriptions;
+	}
+
+	public void setPrescriptions(String prescriptions) {
+		this.prescriptions = prescriptions;
+	}
+
 	public Patient getPatient() {
 		return patient;
 	}
+
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}

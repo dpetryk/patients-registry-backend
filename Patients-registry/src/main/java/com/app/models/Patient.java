@@ -1,6 +1,5 @@
 package com.app.models;
 
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,11 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "patients")
@@ -29,10 +25,9 @@ public class Patient {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	private Address address;
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="patient_id")
-	private List<Visit> visits;
+//	@OneToMany(cascade = CascadeType.ALL)   
+//	@JoinColumn(name = "patient_id")
+//	private List<Visit> visits;
 
 	public Patient() {
 	}
@@ -77,12 +72,12 @@ public class Patient {
 		this.address = address;
 	}
 
-	public List<Visit> getVisits() {
-		return visits;
-	}
-
-	public void setVisits(List<Visit> visits) {
-		this.visits = visits;
-	}
+//	public List<Visit> getVisits() {
+//		return visits;
+//	}
+//
+//	public void setVisits(List<Visit> visits) {
+//		this.visits = visits;
+//	}
 
 }
