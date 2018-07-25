@@ -2,6 +2,7 @@ package com.app.models;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,8 +27,10 @@ public class Visit {
 	@Column(length = 1024)
 	private String notes;
 	@Column(length = 1024)
+	private String recommendations;
+	@Column(length = 1024)
 	private String prescriptions;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
 
@@ -53,6 +56,14 @@ public class Visit {
 
 	public void setNotes(String notes) {
 		this.notes = notes;
+	}
+
+	public String getRecommendations() {
+		return recommendations;
+	}
+
+	public void setRecommendations(String recommendations) {
+		this.recommendations = recommendations;
 	}
 
 	public String getPrescriptions() {

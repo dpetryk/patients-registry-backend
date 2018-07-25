@@ -1,6 +1,7 @@
 package com.app.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,8 +31,7 @@ public class VisitsController {
 
 	@PostMapping
 	public Visit create(@RequestBody Visit visit) {
-		System.out.println("im in create visit");
-		System.out.println(visit.getVisitDate());
+		visit.setVisitDate(new Date(visit.getVisitDate().getTime()+7200000)); // H2 timezone workaround add 2h to save proper time in H2
 		return visitsRepository.saveAndFlush(visit);
 	}
 

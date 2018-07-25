@@ -22,6 +22,8 @@ public class Patient {
 	private String firstName;
 	private String lastName;
 	private String pesel;
+	private String email;
+	private String phone;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	private Address address;
@@ -62,6 +64,22 @@ public class Patient {
 
 	public void setPesel(String pesel) {
 		this.pesel = pesel;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public Address getAddress() {
