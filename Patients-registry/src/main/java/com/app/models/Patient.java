@@ -24,12 +24,10 @@ public class Patient {
 	private String pesel;
 	private String email;
 	private String phone;
+	private boolean vip;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	private Address address;
-//	@OneToMany(cascade = CascadeType.ALL)   
-//	@JoinColumn(name = "patient_id")
-//	private List<Visit> visits;
 
 	public Patient() {
 	}
@@ -82,6 +80,14 @@ public class Patient {
 		this.phone = phone;
 	}
 
+	public boolean isVip() {
+		return vip;
+	}
+
+	public void setVip(boolean vip) {
+		this.vip = vip;
+	}
+
 	public Address getAddress() {
 		return address;
 	}
@@ -89,13 +95,4 @@ public class Patient {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-
-//	public List<Visit> getVisits() {
-//		return visits;
-//	}
-//
-//	public void setVisits(List<Visit> visits) {
-//		this.visits = visits;
-//	}
-
 }
