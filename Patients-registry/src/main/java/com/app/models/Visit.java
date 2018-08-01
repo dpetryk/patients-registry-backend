@@ -30,6 +30,7 @@ public class Visit {
 	private String recommendations;
 	@Column(length = 1024)
 	private String prescriptions;
+	private boolean completed;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "patient_id")
 	private Patient patient;
@@ -72,6 +73,14 @@ public class Visit {
 
 	public void setPrescriptions(String prescriptions) {
 		this.prescriptions = prescriptions;
+	}
+
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
 	}
 
 	public Patient getPatient() {
